@@ -1,13 +1,13 @@
 --Death_table
 
--- There're some contient is NULL so location is all contient --> This is incorrect when we compare countries so we sort out all continents which are NULL
+-- There are some contient is NULL so location is all contient --> This is incorrect when we compare countries so we sort out all continents which are NULL
 Select * 
 From Covid_Death
 WHERE continent is not null
 Order by 3,4
 
 -- Looking total_cases vs total_deaths
--- Show likelihood of dying if you contract covid in your country
+-- Show the likelihood of dying if you contract COVID in your country
 Select location, date, population, total_cases, total_deaths, (convert(decimal, total_deaths)/(convert(decimal,total_cases)))*100 AS Death_Percentage 
 FROM Covid_Death
 --Where location = 'vietnam'
@@ -22,7 +22,7 @@ FROM Covid_Death
 WHERE continent is not null
 Order by 5 desc
 
--- Looking at countries with highest infection rate compared to population
+-- Looking at countries with the highest infection rate compared to the population
 
 Select location, population, Max(cast(total_cases as decimal)) AS Max_total_cases, Max(convert(decimal, total_cases)/(convert(decimal, population)))*100 AS Percent_Population_Infected
 FROM Covid_Death
@@ -31,7 +31,7 @@ WHERE continent is not null
 Group by location, population
 Order by Percent_Population_Infected desc
 
--- Showing country with highest death count per population
+-- Showing country with the highest death count per population
 Select location, Max(cast(total_deaths as int)) AS Max_total_death_count
 --Where location like '%vietnam%'
 From Covid_Death
@@ -47,7 +47,7 @@ WHERE continent is not null
 Group by continent
 Order by Max_total_death_count desc
 
--- SHhowing the continent with hiaghest death count
+-- SHhowing the continent with highest death count
 Select continent, Max(cast(total_deaths as int)) AS Max_total_death_count
 --Where location like '%vietnam%'
 From Covid_Death
